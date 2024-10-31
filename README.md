@@ -19,3 +19,23 @@
 2. **vtable에서 올바른 함수 찾기**: 가상 테이블에서 해당 가상 함수에 대한 포인터를 찾아가서 이 포인터가 가리키는 함수로 이동한다.
 
 3. **함수 호출**: 최종적으로 가리킨 함수를 호출하여 다형성 기능을 구현하게 된다.
+
+#include <iostream>
+
+class B {
+public:
+	B() { std::cout << "B 생성자" << std::endl;};
+	virtual ~B() {std::cout << "B 소멸자" << std::endl;};
+};
+
+class A : public B{
+public:
+	A() { std::cout << "A 생성자" << std::endl;};
+	~A() {std::cout << "A 소멸자" << std::endl;};
+};
+
+int main() {
+	B *b = new A();
+ // 이 경우에 b의 vptr은 A의 vtable을 가르킨다.
+    return 0;
+}
